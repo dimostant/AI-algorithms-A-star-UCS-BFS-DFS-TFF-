@@ -17,7 +17,7 @@ def generate_graph():
     add_neighbours('8', ['0', '9'])
     add_neighbours('9', ['8', '1','19','10'])
     add_neighbours('10', ['9', '11'])
-    add_neighbours('11', ['10', '9', '20'])
+    add_neighbours('11', ['10', '2', '20'])
     add_neighbours('12', ['4', '22', '13'])
     add_neighbours('13', ['12', '5', '23', '14'])
     add_neighbours('14', ['13', '15'])

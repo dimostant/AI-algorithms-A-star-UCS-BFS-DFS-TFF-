@@ -1,4 +1,4 @@
-from basicFunctions import pop_frontier, get_frontier_params_new
+from foreignBasicFunctions import PriorityQueue, pop_frontier, get_frontier_params_new
 
 def uniform_cost_search(graph, start, goal):    
     path = []    
