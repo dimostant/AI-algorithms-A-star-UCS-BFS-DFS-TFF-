@@ -126,3 +126,13 @@ def main():
 
 if __name__ == '__main__':
     main()
+    
+    #Notes:
+        #If i put as a start(5,0) and end(10,12) it will start doing an infinite loop between the cells (7,4),(7,5),(7,6),(7,7). I have yet to understand why though.
+        #If i put a start(5,12) and end(10,12) it will work.
+        #It cannot easily navigate through the maze and is forced to do the infinite loop.
+        #During the infinite loop, it does not always seem to add anything in the neighbours.f, neighbours.h and neighbours.g even when the node_position is not 0
+    #Conclusion(according to notes)
+        #I might need to change a thing or two in the for loop in which we try to find a new position
+        #I may even have to change the maze itself
+        #The fact that its backtra
