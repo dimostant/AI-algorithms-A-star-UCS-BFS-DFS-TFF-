@@ -135,4 +135,4 @@ if __name__ == '__main__':
     #Conclusion(according to notes)
         #I might need to change a thing or two in the for loop in which we try to find a new position
         #I may even have to change the maze itself
-        #The fact that its backtra
+        #The fact that its backtracking shows there is something going on between closed_list and neighbours
