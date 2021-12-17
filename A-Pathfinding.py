@@ -12,12 +12,21 @@ class Nodes():
     #Defining and Initializing position - returning its new variable  
     def __eq__(self, other):
         return self.position == other.position
+
+    def print(self):
+        print(self.parent)
+        print(self.position)
+        print(self.g)
+        print(self.h)
+        print(self.f)
+        
     
 def Apathfinding(maze,start,end): #maze is the tuples we will use for the algorithm
 
     #Create start and end Node as well as initialize their g,h and f costs
     start_Node = Nodes(None,start)
     start_Node.g = start_Node.h = start_Node.f = 0
+
     end_Node = Nodes(None,end)
     end_Node.g = end_Node.h = end_Node.f = 0
     
@@ -35,6 +44,7 @@ def Apathfinding(maze,start,end): #maze is the tuples we will use for the algori
         current_Index = 0
 
         for index,item in enumerate(open_List): #enumerate counts the items in open_list (i,item) with i >= 0 
+            print(index, item)
             if item.f < current_Node.f:
                 current_Node = item
                 current_Index = index
@@ -51,11 +61,10 @@ def Apathfinding(maze,start,end): #maze is the tuples we will use for the algori
                 current = current.parent #We store the Parent Node
                
             return path[::-1], #Trace back until the Beginning is reached
-        
-        (x, y) = current_Node.position
+    
         #Generate neighbours
         Neighbours = []
-        for new_position in [(0, -1), (0, 1), (-1, 0), (1, 0)]:
+        for new_position in [(0, -1) , (0, 1) , (-1, 0) , (1, 0)]:
 
             #Get the new position
             node_position = (current_Node.position[0] + new_position[0], current_Node.position[1] + new_position[1])
@@ -76,9 +85,13 @@ def Apathfinding(maze,start,end): #maze is the tuples we will use for the algori
         #Loop through Neighbours
         for neighbour in Neighbours:
             #If neighbour is in closed_List then break the for loop
+            check = False
             for closed_neighbour in closed_List:
                 if neighbour == closed_neighbour:
+                    check = True
                     continue
+            if check:
+                continue
             
             #If the position has g.Cost 1
             if maze[node_position[0]][node_position[1]] == '1':
@@ -95,9 +108,13 @@ def Apathfinding(maze,start,end): #maze is the tuples we will use for the algori
             
            
             #if the neighbour is in the open_List
+            check = False
             for open_Node in open_List:
                 if neighbour == open_Node and neighbour.g > open_Node.g:
+                    check = True
                     continue
+            if check:
+                continue
             
             #Add neighbour in the open_List
             open_List.append(neighbour)
@@ -114,25 +131,18 @@ def main():
              ['0','1','2','0','1','0','0','2','1','1','2','0','2'], #row(6,12)
              ['1','0','1','1','2','1','1','1','0','1','1','1','1'], #row(7,12)
              ['1','1','2','1','1','0','0','1','0','0','0','0','1'], #row(8,12)
-             ['0','0','1','1','1','1','0','1','1','1','1','1','2'], #row(9,12)'
-             ['0','0','1','0','0','1','1','2','0','0','0','1','1']  #row(10,12)    
+             ['0','0','1','1','1','1','0','1','1','1','1','1','2'], #row(9,12)
+             ['0','0','1','0','0','1','1','2','0','0','0','1','1'], #row(10,12)
+             ['0','0','0','0','0','0','0','0','0','0','0','0','0']  #row(11,12)
            ]
 
-    start = (0,0)
+
+    start = (9,2)
     end = (10,12)
+
 
     path = Apathfinding(maze,start,end)
     print('The path is:',path)
 
 if __name__ == '__main__':
     main()
-    
-    #Notes:
-        #If i put as a start(5,0) and end(10,12) it will start doing an infinite loop between the cells (7,4),(7,5),(7,6),(7,7). I have yet to understand why though.
-        #If i put a start(5,12) and end(10,12) it will work.
-        #It cannot easily navigate through the maze and is forced to do the infinite loop.
-        #During the infinite loop, it does not always seem to add anything in the neighbours.f, neighbours.h and neighbours.g even when the node_position is not 0
-    #Conclusion(according to notes)
-        #I might need to change a thing or two in the for loop in which we try to find a new position
-        #I may even have to change the maze itself
-        #The fact that its backtracking shows there is something going on between closed_list and neighbours
