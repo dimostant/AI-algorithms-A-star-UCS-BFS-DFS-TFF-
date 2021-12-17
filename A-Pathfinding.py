@@ -136,16 +136,13 @@ def main():
              ['0','0','0','0','0','0','0','0','0','0','0','0','0']  #row(11,12)
            ]
 
-    print(len(maze) - 1)
 
     start = (9,2)
     end = (10,12)
 
-    arr = [[],[]]
-    print(len(arr))
 
-    #path = Apathfinding(maze,start,end)
-    #print('The path is:',path)
+    path = Apathfinding(maze,start,end)
+    print('The path is:',path)
 
 if __name__ == '__main__':
     main()
