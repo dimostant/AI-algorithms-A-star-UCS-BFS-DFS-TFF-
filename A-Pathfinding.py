@@ -51,11 +51,10 @@ def Apathfinding(maze,start,end): #maze is the tuples we will use for the algori
                 current = current.parent #We store the Parent Node
                
             return path[::-1], #Trace back until the Beginning is reached
-        
-        (x, y) = current_Node.position
+    
         #Generate neighbours
         Neighbours = []
-        for new_position in [(0, -1), (0, 1), (-1, 0), (1, 0)]:
+        for new_position in [(0, -1) , (0, 1) , (-1, 0) , (1, 0)]:
 
             #Get the new position
             node_position = (current_Node.position[0] + new_position[0], current_Node.position[1] + new_position[1])
@@ -76,9 +75,13 @@ def Apathfinding(maze,start,end): #maze is the tuples we will use for the algori
         #Loop through Neighbours
         for neighbour in Neighbours:
             #If neighbour is in closed_List then break the for loop
+            check = False
             for closed_neighbour in closed_List:
                 if neighbour == closed_neighbour:
+                    check = True
                     continue
+            if check:
+                continue
             
             #If the position has g.Cost 1
             if maze[node_position[0]][node_position[1]] == '1':
@@ -95,9 +98,13 @@ def Apathfinding(maze,start,end): #maze is the tuples we will use for the algori
             
            
             #if the neighbour is in the open_List
+            check = False
             for open_Node in open_List:
                 if neighbour == open_Node and neighbour.g > open_Node.g:
+                    check = True
                     continue
+            if check:
+                continue
             
             #Add neighbour in the open_List
             open_List.append(neighbour)
@@ -126,13 +133,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-    
-    #Notes:
-        #If i put as a start(5,0) and end(10,12) it will start doing an infinite loop between the cells (7,4),(7,5),(7,6),(7,7). I have yet to understand why though.
-        #If i put a start(5,12) and end(10,12) it will work.
-        #It cannot easily navigate through the maze and is forced to do the infinite loop.
-        #During the infinite loop, it does not always seem to add anything in the neighbours.f, neighbours.h and neighbours.g even when the node_position is not 0
-    #Conclusion(according to notes)
-        #I might need to change a thing or two in the for loop in which we try to find a new position
-        #I may even have to change the maze itself
-        #The fact that its backtracking shows there is something going on between closed_list and neighbours
