@@ -24,7 +24,9 @@ def ucs(graph, start, goal):
             if node == goal:
                 return
             for i in Graph.neighbors(node):
+                print(Graph)
                 if i not in visited:
                     total_cost = cost + graph.get_cost(node, i)
                     queue.put((total_cost, i))       
 
+ucs({1,4,7,9,8,19}, 1, 7)

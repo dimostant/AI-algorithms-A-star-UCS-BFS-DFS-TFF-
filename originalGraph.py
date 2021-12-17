@@ -43,7 +43,7 @@ def generate_graph():
     add_neighbours('33', ['32', '24', '34'])
     add_neighbours('34', ['33', '35'])
     add_neighbours('35', ['34', '25', '36'])
-    add_neighbours('36', ['35'])
+    add_neighbours('36', ['35', '42'])
 
     add_neighbours('37', ['28', '45', '38'])
     add_neighbours('38', ['37'])
@@ -58,14 +58,16 @@ def generate_graph():
     add_neighbours('46', ['54'])
     add_neighbours('47', ['40', '48'])
     add_neighbours('48', ['47', '41', '55'])
+    #add_neighbours('48', ['47', '41', '55D'])
     add_neighbours('49', ['50'])
     add_neighbours('50', ['49', '51'])
-    add_neighbours('51', ['50'])
+    add_neighbours('51', ['50', '42', '58'])
 
     add_neighbours('52', ['44', '53']) 
     add_neighbours('53', ['45', '52']) 
     add_neighbours('54', ['46', '62'])  
     add_neighbours('55', ['48', '65', '56'])
+    #add_neighbours('56', ['55D', '57']) 
     add_neighbours('56', ['55', '57']) 
     add_neighbours('57', ['56', '66'])
     add_neighbours('58', ['51', '69'])
@@ -76,11 +78,12 @@ def generate_graph():
     add_neighbours('62', ['61', '54', '74', '63'])
     add_neighbours('63', ['62', '64'])
     add_neighbours('64', ['63', '65'])
+    #add_neighbours('65', ['64', '55D', '75'])
     add_neighbours('65', ['64', '55', '75'])
     add_neighbours('66', ['57', '67'])
     add_neighbours('67', ['66', '68'])
     add_neighbours('68', ['67', '69'])
-    add_neighbours('69', ['68'])
+    add_neighbours('69', ['68', '58', '76'])
 
     add_neighbours('70', ['59', '71'])
     add_neighbours('71', ['70', '72'])
@@ -88,6 +91,7 @@ def generate_graph():
     add_neighbours('73', ['72', '61', '78', '74'])
     add_neighbours('74', ['73', '62', '79'])
     add_neighbours('75', ['65', '81'])
+    #add_neighbours('76', ['69', '86D'])
     add_neighbours('76', ['69', '86'])
 
     add_neighbours('77', ['72', '87', '78'])
@@ -98,6 +102,7 @@ def generate_graph():
     add_neighbours('82', ['81', '83'])
     add_neighbours('83', ['82', '84'])
     add_neighbours('84', ['83', '85'])
+    #add_neighbours('85', ['84', '91', '86D'])
     add_neighbours('85', ['84', '91', '86'])
     add_neighbours('86', ['85', '76', '92'])
 
@@ -106,6 +111,7 @@ def generate_graph():
     add_neighbours('89', ['88', '90'])
     add_neighbours('90', ['89', '81'])
     add_neighbours('91', ['85', '92'])
+    #add_neighbours('92', ['91', '86D'])
     add_neighbours('92', ['91', '86'])
 
     return graph_neighbours
