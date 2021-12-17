@@ -26,12 +26,13 @@ def IDS(adj_list, start, target, path, visited = set()):
     bot_reach=False #Variable ama ftasame ston pato tou dentrou
 
     while not bot_reach:
-        bot_reach= DFS(adj_list,start, target,path,0,current_depth,visited)
+        bot_reach= DFS(adj_list,start, target,path,0,current_depth,visited=set())
         if bot_reach is not None:
             return bot_reach
 
         current_depth=current_depth+1
         print("Increasing depth to " + str(current_depth))
+        
 
     return None
 
