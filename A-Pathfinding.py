@@ -12,12 +12,21 @@ class Nodes():
     #Defining and Initializing position - returning its new variable  
     def __eq__(self, other):
         return self.position == other.position
+
+    def print(self):
+        print(self.parent)
+        print(self.position)
+        print(self.g)
+        print(self.h)
+        print(self.f)
+        
     
 def Apathfinding(maze,start,end): #maze is the tuples we will use for the algorithm
 
     #Create start and end Node as well as initialize their g,h and f costs
     start_Node = Nodes(None,start)
     start_Node.g = start_Node.h = start_Node.f = 0
+
     end_Node = Nodes(None,end)
     end_Node.g = end_Node.h = end_Node.f = 0
     
@@ -35,6 +44,7 @@ def Apathfinding(maze,start,end): #maze is the tuples we will use for the algori
         current_Index = 0
 
         for index,item in enumerate(open_List): #enumerate counts the items in open_list (i,item) with i >= 0 
+            print(index, item)
             if item.f < current_Node.f:
                 current_Node = item
                 current_Index = index
@@ -121,8 +131,11 @@ def main():
     start = (0,0)
     end = (10,12)
 
-    path = Apathfinding(maze,start,end)
-    print('The path is:',path)
+    arr = [[],[]]
+    print(len(arr))
+
+    #path = Apathfinding(maze,start,end)
+    #print('The path is:',path)
 
 if __name__ == '__main__':
     main()
