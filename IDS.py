@@ -1,9 +1,4 @@
 # Using a Python dictionary to act as an adjacency list
-from originalGraph import graph_neighbours
-
-
-
-# DFS algorithm in Python
 
 def DFS(adj_list, start, target, path, depth,max_depth,visited = set()):
     path.append(start)
@@ -11,8 +6,6 @@ def DFS(adj_list, start, target, path, depth,max_depth,visited = set()):
     if start == target:
         return path
     for neighbour in adj_list[start]:
-        print(adj_list[start])
-        print(neighbour)
         if neighbour not in visited:
             result = DFS(adj_list, neighbour, target, path,depth,max_depth, visited)
             if result is not None:
@@ -20,12 +13,12 @@ def DFS(adj_list, start, target, path, depth,max_depth,visited = set()):
     path.pop()
     return None
 
-# IDS algorithm in Python
 
 def IDS(adj_list, start, target, path, visited = set()):
 
     current_depth=1
-    bot_reach=False #Variable ama ftasame ston pato tou dentrou
+    #if tree depth is reached
+    bot_reach=False #
 
     while not bot_reach:
         bot_reach= DFS(adj_list,start, target,path,0,current_depth,visited=set())
@@ -37,7 +30,3 @@ def IDS(adj_list, start, target, path, visited = set()):
         
 
     return None
-
-traversal_path = []
-traversal_path = IDS(graph_neighbours, '0','92',traversal_path)
-print(traversal_path)

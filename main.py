@@ -1,20 +1,27 @@
-#from testGraph import graph_neighbours
-#from UCS import ucs
-from originalGraph import graph_neighbours
+from originalGraph import generate_graph_params
 from testUCS import uniform_cost_search
+from IDS import IDS
 
 
 if __name__ == "__main__":
+    
+    #Uniform Cost Search
+    cost = True
     standard_cost = 1
     door_cost = 2
+    path_ucs, explored_ucs = uniform_cost_search(generate_graph_params(cost), '0', '92', standard_cost, door_cost)
     print("============ UCS Search ================")
-    path_ucs, explored_ucs = uniform_cost_search(graph_neighbours, '55', '92', standard_cost, door_cost)
-    #path_ucs = ucs(graph_neighbours, '0', '92')
     print("Path UCS:", path_ucs)
-    #print("Explored Nodes UCS: ", explored_ucs)
-    #print(len(explored_ucs))
-    #print()
-    
+
+    #Iterative Deepening Search
+    cost = False
+    traversal_path = []
+    traversal_path = IDS(generate_graph_params(cost), '0','92',traversal_path)
+    print("============ IDS Search ================")
+    print("Path IDS:", traversal_path)
+
+    #A star Search
+
     
 
 
