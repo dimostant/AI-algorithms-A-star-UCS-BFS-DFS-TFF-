@@ -12,14 +12,6 @@ class Nodes():
     def __eq__(self, other):
         return self.position == other.position
 
-    def print(self):
-        print(self.parent)
-        print(self.position)
-        print(self.g)
-        print(self.h)
-        print(self.f)
-
-
 def Apathfinding(maze, start, end):  # maze is the tuples we will use for the algorithm
 
     #Create start and end Node as well as initialize their g,h and f costs
@@ -44,7 +36,6 @@ def Apathfinding(maze, start, end):  # maze is the tuples we will use for the al
 
         # enumerate counts the items in open_list (i,item) with i >= 0
         for index, item in enumerate(open_List):
-            print(index, item)
             if item.f < current_Node.f:
                 current_Node = item
                 current_Index = index
@@ -121,31 +112,4 @@ def Apathfinding(maze, start, end):  # maze is the tuples we will use for the al
             #Add neighbour in the open_List
             open_List.append(neighbour)
 
-
-def main():
-    
-    graph_neighbours = [
-        ['1', '1', '0', '1', '1', '1', '1', '0', '0', '1', '0', '1', '0'],  # row(0,12)
-        ['1', '1', '1', '2', '0', '1', '1', '1', '1', '1', '2', '1', '0'],  # row(1,12)
-        ['0', '1', '0', '1', '1', '1', '1', '0','0', '1', '0', '1', '0' ],  # row(2,12)
-        ['1', '1', '2', '0', '1', '2', '0', '1','1', '2', '1', '1', '1' ],  # row(3,12)
-        ['0', '0', '1', '1', '0', '1', '1', '1','0', '0', '0', '0', '1' ],  # row(4,12)
-        ['1', '2', '1', '0', '1', '0', '1', '1', '0', '0', '1', '1', '1'],  # row(5,12)
-        ['0', '1', '2', '0', '1', '0', '0', '2', '1', '1', '2', '0', '2'],  # row(6,12)
-        ['1', '0', '1', '1', '2', '1', '1', '1', '0', '1', '1', '1', '1'],  # row(7,12)
-        ['1', '1', '2', '1', '1', '0', '0', '1','0', '0', '0', '0', '1' ],  # row(8,12)
-        ['0', '0', '1', '1', '1', '1', '0', '1','1', '1', '1', '1', '2' ],  # row(9,12)
-        ['0', '0', '1', '0', '0', '1', '1', '2','0', '0', '0', '1', '1' ],  # row(10,12)
-        ['0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0']   # row(11,12)
-    ]
-
-    start = (0,0)
-    end = (10, 12)
-
-    path = Apathfinding(graph_neighbours, start, end)
-    print('The path is:', path)
-
-
-if __name__ == '__main__':
-    main()
 
