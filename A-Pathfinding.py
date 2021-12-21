@@ -93,6 +93,7 @@ def Apathfinding(maze, start, end):  # maze is the tuples we will use for the al
                 if neighbour == explored_neighbour:
                     check = True
                     continue
+            #If check true, break the loop here
             if check:
                 continue
 
