@@ -1,5 +1,5 @@
-from originalGraph import generate_graph_params
-from testUCS import uniform_cost_search
+from graph import generate_graph_params
+from UCS import uniform_cost_search
 from IDS import IDS
 
 
