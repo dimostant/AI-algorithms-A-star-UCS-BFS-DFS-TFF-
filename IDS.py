@@ -18,7 +18,7 @@ def IDS(adj_list, start, target, path, visited = set()):
 
     current_depth=1
     #if tree depth is reached
-    bot_reach=False #
+    bot_reach=False
 
     while not bot_reach:
         bot_reach= DFS(adj_list,start, target,path,0,current_depth,visited=set())
