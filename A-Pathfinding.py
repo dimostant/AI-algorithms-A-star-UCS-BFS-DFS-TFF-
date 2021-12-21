@@ -66,11 +66,10 @@ def Apathfinding(maze, start, end):  # maze is the tuples we will use for the al
 
         #Generate neighbours
         Neighbours = []
-        for new_position in [(0, -1), (0, 1), (-1, 0), (1, 0)]:
+        for new_position in [(0, -1), (0, 1), (-1, 0), (1, 0)]: #Adjacent List - Manhattan
 
             #Get the new position
-            node_position = (
-                current_Node.position[0] + new_position[0], current_Node.position[1] + new_position[1])
+            node_position = (current_Node.position[0] + new_position[0], current_Node.position[1] + new_position[1])
 
             #Make sure its within range
             if node_position[0] > (len(maze) - 1) or node_position[0] < 0 or node_position[1] > (len(maze[len(maze)-1]) - 1) or node_position[1] < 0:
@@ -93,30 +92,29 @@ def Apathfinding(maze, start, end):  # maze is the tuples we will use for the al
                 if neighbour == explored_neighbour:
                     check = True
                     continue
-            #If check true, break the loop here
+            #If check is true, break the loop here
             if check:
                 continue
 
             #If the position has g.Cost 1
             if maze[node_position[0]][node_position[1]] == '1':
                 neighbour.g = current_Node.g + 1
-                neighbour.h = ((neighbour.position[0] - goal_Node.position[0]) ** 2) + (
-                    (neighbour.position[1] - goal_Node.position[1]) ** 2)
+                neighbour.h = ((neighbour.position[0] - goal_Node.position[0]) ** 2) + ((neighbour.position[1] - goal_Node.position[1]) ** 2)
                 neighbour.f = neighbour.g + neighbour.h
 
             #If the position has g.Cost 2
             if maze[node_position[0]][node_position[1]] == '2':
                 neighbour.g = current_Node.g + 2
-                neighbour.h = ((neighbour.position[0] - goal_Node.position[0]) ** 2) + (
-                    (neighbour.position[1] - goal_Node.position[1]) ** 2)
+                neighbour.h = ((neighbour.position[0] - goal_Node.position[0]) ** 2) + ((neighbour.position[1] - goal_Node.position[1]) ** 2)
                 neighbour.f = neighbour.g + neighbour.h
-
+                
             #if the neighbour is in the open_List
             check = False
             for open_Node in open_List:
                 if neighbour == open_Node and neighbour.g > open_Node.g:
                     check = True
                     continue
+            #if check is true, break the loop
             if check:
                 continue
 
@@ -125,7 +123,7 @@ def Apathfinding(maze, start, end):  # maze is the tuples we will use for the al
 
 
 def main():
-
+    
     graph_neighbours = [
         ['1', '1', '0', '1', '1', '1', '1', '0', '0', '1', '0', '1', '0'],  # row(0,12)
         ['1', '1', '1', '2', '0', '1', '1', '1', '1', '1', '2', '1', '0'],  # row(1,12)
@@ -150,3 +148,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
