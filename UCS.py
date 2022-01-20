@@ -126,5 +126,5 @@ def uniform_cost_search(graph, start, goal, standard_cost, door_cost):
                     frontier.pop(indexx)
                     frontier.append(new_element) 
             index += 1
-    
+    #no goal found in frontier, return none
     return None, None  

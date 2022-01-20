@@ -101,13 +101,14 @@ def Apathfinding(graph, start, end, standard_cost, door_cost):
            index += 1
 
         neighbours_list_int = [int(n) for n in neighbours]
-        neighbours_list_int.sort(reverse=False)
+        neighbours_list_int, neighbour_cost_list = zip(*sorted(zip(neighbours_list_int, neighbour_cost_list)))   
         neighbours_list_str = [str(n) for n in neighbours_list_int]
-
+        index = 0
         for neighbour in neighbours_list_str:
             path_to_neighbour = path_till_now.copy()
             path_to_neighbour.append(neighbour)
-            extra_cost = 1
+            
+            extra_cost = neighbour_cost_list[index]    
             neighbour_cost = extra_cost + path_cost_till_now + \
                 get_manhattan_heuristic(neighbour, end)
             new_element = (neighbour_cost, path_to_neighbour)
@@ -122,5 +123,5 @@ def Apathfinding(graph, start, end, standard_cost, door_cost):
                 if neighbour_old_cost > neighbour_cost:
                     frontier.pop(indexx)
                     frontier.append(new_element)
-
+        index += 1
     return None, None
