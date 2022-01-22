@@ -2,6 +2,7 @@ from ctypes.wintypes import CHAR, INT
 import random
 import sys
 
+txt = []
 literals = list (
     ['a', 'b', 'c',
      'd', 'e', 'f',
@@ -13,6 +14,7 @@ literals = list (
      'v', 'w', 'x', 
      'y', 'z']
 )
+
 
 if __name__ == "__main__":
     # it_is = False
@@ -38,7 +40,7 @@ if __name__ == "__main__":
     # it_is = False
 
     # while not it_is:
-    #     P = input("Give number of total literals that can be used")
+    #     P = input("Give number of total literals that can be used(max 26)")
     #     try:
     #         int(P)
     #         it_is = True
@@ -49,28 +51,22 @@ if __name__ == "__main__":
     #             it_is = True
     #         else:
     #          it_is = False
-# :(
+
+
+    #debug
     C = 5
     L = 3
     P =26
     print(C, L, P)
+    #
 
+    f = open("Knowledge database.txt", "a")
+    f.write(str(C) + '\n' + str(L) + '\n' + str(P) + '\n')
+    f.close() 
 
-
-    # Loop for C
-        # exists = True
-        # While exists == True
-            # choose a number from 0 to L
-            # loop for L
-                # choose a number from 1 to P
-                # 50% probability for the number to have a not in front ( - for now , actual character if there is time)
-                # Add word to sentence
-            # loop for txt sentences(skip sentences that give data?)
-            # if new sentence exists in txt continue?? (exists == True)
-            # exists == False
-        # Add sentence to txt and change line
-
+    #debug
     total_tries = 0
+    #
     
     for X in range(C) :
         sentence = '' 
@@ -78,25 +74,36 @@ if __name__ == "__main__":
         while sentenceExists == True : 
             total_tries = total_tries + 1
 
+            #chech if randint has %possibility
             for Y in range(random.randint(1, L)) :
                 R = literals[random.randint(1, P-1)]
                 if random.randint(0, 1) == 1 :
                     R ='-' + R
                 sentence = sentence + R
                 #separate with ' '? /Xwrizoume me ' '?
-            f = open("Knowledge database.txt", "r") 
+            #f = open("Knowledge database.txt", "r") 
 
             sentenceExists = False
 
-            for line in f :
+            for line in txt :
                 if line == sentence :
                     sentenceExists = True  
                     break 
+            
+            #f.close()
 
+           # f = open("Knowledge database.txt", "a") 
             if sentenceExists == False :
-                f = open("Knowledge database.txt", "a") 
-                f.write(sentence + '\n')
-            f.close()
+                txt.append(sentence)
+                #f.write(sentence + '\n')
+            
+            #f.close()
+    #debug
     print(total_tries)
-
-            # print(f.read())
+    print(txt)
+    #
+    f = open("Knowledge database.txt", "a")
+    
+    for line in range(len(txt)) :
+        f.write(txt[line] + '\n')
+    f.close() 
