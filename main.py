@@ -15,6 +15,10 @@ literals = list (
      'y', 'z']
 )
 
+def GSAT(a, maxTries, maxFlips):
+    for i in maxTries :
+        T = a
+    
 
 if __name__ == "__main__":
     # it_is = False
@@ -53,55 +57,99 @@ if __name__ == "__main__":
     #          it_is = False
 
 
-    #debug
-    C = 5
-    L = 3
-    P =26
-    print(C, L, P)
-    #
+    # #debug
+    # C = 5
+    # L = 3
+    # P =26
+    # print(C, L, P)
+    # #
 
-    f = open("Knowledge database.txt", "a")
-    f.write(str(C) + '\n' + str(L) + '\n' + str(P) + '\n')
-    f.close() 
+    # f = open("Knowledge database.txt", "a")
+    # f.write(str(C) + '\n' + str(L) + '\n' + str(P) + '\n')
+    # f.close() 
 
-    #debug
-    total_tries = 0
-    #
+    # #debug
+    # total_tries = 0
+    # #
     
-    for X in range(C) :
-        sentence = '' 
-        sentenceExists = True
-        while sentenceExists == True : 
-            total_tries = total_tries + 1
+    # for X in range(C) :
+    #     sentence = '' 
+    #     sentenceExists = True
+    #     while sentenceExists == True : 
+    #         total_tries = total_tries + 1
 
-            #chech if randint has %possibility
-            for Y in range(random.randint(1, L)) :
-                R = literals[random.randint(1, P-1)]
-                if random.randint(0, 1) == 1 :
-                    R ='-' + R
-                sentence = sentence + R
-                #separate with ' '? /Xwrizoume me ' '?
-            #f = open("Knowledge database.txt", "r") 
+    #         terms = random.randint(1, L)
+    #         #chech if randint has %possibility
+    #         for Y in range(terms) :
+    #             R_repeats = True
 
-            sentenceExists = False
+    #             while  R_repeats == True : 
+    #                 R = literals[random.randint(1, P-1)]
+    #                 R_repeats = False
+                    
 
-            for line in txt :
-                if line == sentence :
-                    sentenceExists = True  
-                    break 
+    #                 for literal in sentence :
+    #                     if literal == '-' or literal == ' ' or literal == '^':
+    #                         continue
+    #                     if literal == R :
+    #                         R_repeats = True
+    #                         break
+                
+    #             if random.randint(0, 1) == 1 :
+    #                 R ='-' + R
+    #             if Y != terms-1 :
+    #                 sentence = sentence + R + ' ^ ' 
+    #             else :
+    #                 sentence = sentence + R 
+                
+
+    #         sentenceExists = False     
+
+    #         for line in txt :
+    #             if line == sentence :
+    #                 sentenceExists = True  
+    #                 break 
             
-            #f.close()
-
-           # f = open("Knowledge database.txt", "a") 
-            if sentenceExists == False :
-                txt.append(sentence)
-                #f.write(sentence + '\n')
-            
-            #f.close()
+    #         if sentenceExists == False :
+    #             txt.append(sentence)
+       
     #debug
-    print(total_tries)
+    txt = [ '-x ^ -v',
+            '-z ^ s ^ j',
+            '-h',
+            '-w',
+            'h ^ -o'    ]
     print(txt)
+    given_literal = 'h'
     #
+
+    # while 1:
+    #     given_literal = input("give literal")
+    #for char in given_literal :
+    #    if char != '#' or (char > 'a' and char < 'z') :
+                 
+    #     #check if input = literal or #
+    #     if given_literal == '#' :
+    #         break
+    #step in for while
+    
+    GSAT_data = txt 
+
+    given_literal.replace(' ', '')
+    if given_literal[0] == '-' :
+        given_literal[0] = given_literal[1] 
+        del given_literal[1]
+    else :
+        given_literal = given_literal + given_literal
+        given_literal[0] = '-'           
+
+    GSAT_data.append(given_literal)
+
+
+
+    #step in for while 
+
+
     f = open("Knowledge database.txt", "a")
     
     for line in range(len(txt)) :
