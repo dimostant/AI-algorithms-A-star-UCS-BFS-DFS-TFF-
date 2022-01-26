@@ -1,6 +1,8 @@
 from ctypes.wintypes import CHAR, INT
+from enum import unique
 import random
 import sys
+from typing import Literal
 
 txt = []
 literals = list (
@@ -16,8 +18,28 @@ literals = list (
 )
 
 def GSAT(a, maxTries, maxFlips):
-    for i in maxTries :
-        T = a
+    for i in range(maxTries) :
+        
+        unique_literals = []
+        for clause in range(a) : 
+            for literal in a[clause]:
+                if literal in unique_literals :
+                    continue
+                else :
+                    unique_literals.append(Literal)
+        
+        unique_literals.remove(' ', 'v', '-')
+                             
+        assignments = []
+        #chech if randint has %possibility
+        for assignment in range(unique_literals) :
+           if random.randint(0, 1) == 1 :
+              assignments.append(True)
+           else :
+              assignments.append(False)
+        
+        #debug
+        print(unique_literals, assignments)
     
 
 if __name__ == "__main__":
@@ -98,7 +120,7 @@ if __name__ == "__main__":
     #             if random.randint(0, 1) == 1 :
     #                 R ='-' + R
     #             if Y != terms-1 :
-    #                 sentence = sentence + R + ' ^ ' 
+    #                 sentence = sentence + R + ' v ' 
     #             else :
     #                 sentence = sentence + R 
                 
@@ -109,6 +131,7 @@ if __name__ == "__main__":
     #             if line == sentence :
     #                 sentenceExists = True  
     #                 break 
+                #check for opposite clause
             
     #         if sentenceExists == False :
     #             txt.append(sentence)
@@ -120,8 +143,10 @@ if __name__ == "__main__":
             '-w',
             'h ^ -o'    ]
     print(txt)
-    given_literal = 'h'
+    given_literal = '-h'
     #
+
+    GSAT_data = txt #clauses connected with ^
 
     # while 1:
     #     given_literal = input("give literal")
@@ -133,17 +158,20 @@ if __name__ == "__main__":
     #         break
     #step in for while
     
-    GSAT_data = txt 
 
     given_literal.replace(' ', '')
     if given_literal[0] == '-' :
-        given_literal[0] = given_literal[1] 
-        del given_literal[1]
+        given_literal = given_literal[1:2]
     else :
-        given_literal = given_literal + given_literal
-        given_literal[0] = '-'           
+        given_literal = "-"+ given_literal          
 
+    print(given_literal)
+    
+    max_flips = 5
+    max_retries = 5
     GSAT_data.append(given_literal)
+
+    #GSAT(txt, max_retries, max_flips)
 
 
 
