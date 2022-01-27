@@ -1,8 +1,5 @@
-from ctypes.wintypes import CHAR, INT
-from enum import unique
 import random
 import sys
-from typing import Literal
 
 txt = []
 literals = list (
@@ -17,30 +14,122 @@ literals = list (
      'y', 'z']
 )
 
+def calculateClausesResult(a, assignments, unique_literals):
+    
+    clauses_assignments = []
+
+    for clause in a :
+
+        literals = [line for line in clause if line != '|' and line != ' ']
+        print(literals)
+
+        literal_index = 0
+        
+        for literal in literals :
+            if literal_index == 0 :
+                if not literal == '-' :
+                    clause_result = assignments[unique_literals.index(literals[literal_index])]
+                    #debug
+                    #print(clause_result)
+                    #print("1st")
+                    #
+                
+                else :
+                    clause_result = not assignments[unique_literals.index(literals[literal_index  + 1])]
+                    #debug
+                    #print(clause_result)
+                    #print("2nd")
+                    #
+                    
+                literal_index +=1
+                #debug
+                #print("3rd")
+                #
+                continue
+            
+            if literals[literal_index -1] == '-':
+                literal_index +=1
+                #debug
+                #print("4th")
+                #
+                continue
+
+            if not literal == '-' :
+                clause_result = clause_result or assignments[unique_literals.index(literals[literal_index])]
+                #debug
+                #print(clause_result)
+                #print("5th")
+                #
+
+            else :
+                clause_result = clause_result or not assignments[unique_literals.index(literals[literal_index  + 1])]
+                #debug
+                #print(clause_result)
+                #print("6th")
+                #
+            literal_index +=1
+
+        print(clause_result)
+        clauses_assignments.append(clause_result)
+        print(clauses_assignments)
+
+        return clauses_assignments
+
 def GSAT(a, maxTries, maxFlips):
-    for i in range(maxTries) :
         
         unique_literals = []
-        for clause in range(a) : 
+        for clause in range(len(a)) : 
             for literal in a[clause]:
                 if literal in unique_literals :
                     continue
                 else :
-                    unique_literals.append(Literal)
+                    unique_literals.append(literal)
         
-        unique_literals.remove(' ', 'v', '-')
-                             
+        unique_literals.remove(' ')
+        unique_literals.remove('|')
+        unique_literals.remove('-')
+
+        print(unique_literals)
+
+    #for try in range(maxTries) :
+
         assignments = []
         #chech if randint has %possibility
-        for assignment in range(unique_literals) :
+        for assignment in range(len(unique_literals)) :
            if random.randint(0, 1) == 1 :
               assignments.append(True)
            else :
               assignments.append(False)
         
-        #debug
-        print(unique_literals, assignments)
-    
+        print(assignments)
+
+        #clause result
+        for flip in range(maxFlips) :
+            
+            clauses_assignments = calculateClausesResult(a, assignments, unique_literals)
+
+            cost = clauses_assignments.count(False)
+            print(cost)
+
+            if cost == 0 : 
+                return clauses_assignments
+            
+            #else :
+                #flip_assignments = []
+                #flip_assignments_costs = []
+
+                #loop for assignments 
+                    #invert i assignment 
+                        #flip_assignments.append(newAssignments)
+                        #calculateClausesResult(newAssignments)
+                        #cost = clauses_assignments.count(False)
+                        #flip_assignment_costs.append(cost)
+
+                #sort cost and assignments through cost (from minimum to maximum)
+
+                #assignments = flip_assignments[0]
+
+        return False
 
 if __name__ == "__main__":
     # it_is = False
@@ -120,7 +209,7 @@ if __name__ == "__main__":
     #             if random.randint(0, 1) == 1 :
     #                 R ='-' + R
     #             if Y != terms-1 :
-    #                 sentence = sentence + R + ' v ' 
+    #                 sentence = sentence + R + ' | ' 
     #             else :
     #                 sentence = sentence + R 
                 
@@ -137,13 +226,12 @@ if __name__ == "__main__":
     #             txt.append(sentence)
        
     #debug
-    txt = [ '-x ^ -v',
-            '-z ^ s ^ j',
+    txt = [ '-x | -v',
+            '-z | s | j',
             '-h',
             '-w',
-            'h ^ -o'    ]
-    print(txt)
-    given_literal = '-h'
+            'h | -o'    ]
+    given_literal = '-b'
     #
 
     GSAT_data = txt #clauses connected with ^
@@ -165,13 +253,12 @@ if __name__ == "__main__":
     else :
         given_literal = "-"+ given_literal          
 
-    print(given_literal)
     
     max_flips = 5
     max_retries = 5
     GSAT_data.append(given_literal)
 
-    #GSAT(txt, max_retries, max_flips)
+    GSAT(GSAT_data, max_retries, max_flips)
 
 
 
@@ -180,6 +267,6 @@ if __name__ == "__main__":
 
     f = open("Knowledge database.txt", "a")
     
-    for line in range(len(txt)) :
-        f.write(txt[line] + '\n')
+    #for line in range(len(txt)) :
+      #  f.write(txt[line] + '\n')
     f.close() 
