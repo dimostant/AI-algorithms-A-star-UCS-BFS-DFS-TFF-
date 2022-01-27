@@ -73,7 +73,7 @@ def calculateClausesResult(a, assignments, unique_literals):
 
         print(clause_result)
         clauses_assignments.append(clause_result)
-        print(clauses_assignments)
+    print(clauses_assignments)
     
     return clauses_assignments
 
@@ -106,31 +106,48 @@ def GSAT(a, maxTries, maxFlips):
         print(assignments)
 
         #clause result
-        for flip in range(maxFlips) :
-            
-            clauses_assignments = calculateClausesResult(a, assignments, unique_literals)
+        clauses_assignments = calculateClausesResult(a, assignments, unique_literals)
 
-            cost = clauses_assignments.count(False)
-            print(cost)
+        cost = clauses_assignments.count(False)
+        print(cost)
+
+        #for flip in range(maxFlips) :
+        for i in [1, 2] : #debug    
 
             if cost == 0 : 
+                print("returned")
                 return clauses_assignments
             
-            #else :
-                #flip_assignments = []
-                #flip_assignments_costs = []
+            else :
+                flip_assignments = []
+                flip_assignments_costs = []
 
-                #loop for assignments 
-                    #invert i assignment 
-                        #flip_assignments.append(newAssignments)
-                        #calculateClausesResult(newAssignments)
-                        #cost = clauses_assignments.count(False)
-                        #flip_assignment_costs.append(cost)
+                #for assignment in range(assignments) :
+                for assignment in range(3) :
+                    new_assignments = assignments.copy()#so that only new assignments is edited
+                    print(new_assignments)
+                    new_assignments[assignment] = not new_assignments[assignment]
+                    print(new_assignments)
+                    flip_assignments.append(new_assignments[:])# : operator so list can get new items and not copy new ones
+                    print(flip_assignments) 
+                    cost = calculateClausesResult(a, new_assignments, unique_literals).count(False)
+                    # does one more iteration ??
+                    flip_assignments_costs.append(cost)
+                
+                print(flip_assignments_costs)
 
                 #sort cost and assignments through cost (from minimum to maximum)
+                flip_assignments_sorted = [x for _, x in sorted(zip(flip_assignments_costs, flip_assignments), key=lambda pair: pair[0])]
+                #optimize in one command?
+                flip_assignments_costs_sorted = sorted(flip_assignments_costs)
+                print(flip_assignments_sorted)
+                print(flip_assignments_costs_sorted)
+                assignments = flip_assignments_sorted[0]
+                cost = flip_assignments_costs_sorted[0]
 
-                #assignments = flip_assignments[0]
+                print(assignments)
 
+        print("false")
         return False
 
 if __name__ == "__main__":
