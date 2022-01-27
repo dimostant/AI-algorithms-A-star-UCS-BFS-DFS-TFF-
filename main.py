@@ -18,6 +18,8 @@ def calculateClausesResult(a, assignments, unique_literals):
     
     clauses_assignments = []
 
+    print(a)
+
     for clause in a :
 
         literals = [line for line in clause if line != '|' and line != ' ']
@@ -72,8 +74,8 @@ def calculateClausesResult(a, assignments, unique_literals):
         print(clause_result)
         clauses_assignments.append(clause_result)
         print(clauses_assignments)
-
-        return clauses_assignments
+    
+    return clauses_assignments
 
 def GSAT(a, maxTries, maxFlips):
         
@@ -259,8 +261,6 @@ if __name__ == "__main__":
     GSAT_data.append(given_literal)
 
     GSAT(GSAT_data, max_retries, max_flips)
-
-
 
     #step in for while 
 
