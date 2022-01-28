@@ -124,7 +124,7 @@ def GSAT(a, maxTries, maxFlips):
             print("maxflips")
             if cost == 0 : 
                 print("returned")
-                return clauses_assignments
+                return True
             
             else :
                 flip_assignments = []
@@ -160,7 +160,7 @@ def GSAT(a, maxTries, maxFlips):
         
         if cost == 0 : 
             print("returned")
-            return clauses_assignments
+            return True
         
     print("false")
     return False
@@ -168,139 +168,175 @@ def GSAT(a, maxTries, maxFlips):
 
 
 if __name__ == "__main__":
-    # it_is = False
 
-    # while not it_is:
-    #     C = input("Give number of sentences for knolwedge database")
-    #     try:
-    #         int(C)
-    #         it_is = True
-    #     except ValueError:
-    #         it_is = False
+    """
+        it_is = False
 
-    # it_is = False
+    while not it_is:
+        C = input("Give number of sentences for knolwedge database")
+        try:
+            int(C)
+            it_is = True
+        except ValueError:
+            it_is = False
 
-    # while not it_is:
-    #     L = input("Give max number of literals for every sentence")
-    #     try:
-    #         int(L)
-    #         it_is = True
-    #     except ValueError:
-    #         it_is = False
+    it_is = False
 
-    # it_is = False
+    while not it_is:
+        L = input("Give max number of literals for every sentence")
+        try:
+            int(L)
+            it_is = True
+        except ValueError:
+            it_is = False
 
-    # while not it_is:
-    #     P = input("Give number of total literals that can be used(max 26)")
-    #     try:
-    #         int(P)
-    #         it_is = True
-    #     except ValueError:
-    #         it_is = False
-    #     if it_is == True:
-    #         if (int(P) < 27) and (int(P) > -1):
-    #             it_is = True
-    #         else:
-    #          it_is = False
+    it_is = False
 
+    while not it_is:
+        P = input("Give number of total literals that can be used(max 26, must be bigger than L)")
+        try:
+            int(P)
+            it_is = True
+        except ValueError:
+            it_is = False
+        if it_is == True:
+            if (int(P) < 27) and (int(P) > int(L)):
+                it_is = True
+            else:
+             it_is = False
 
+    C = int(C)
+    L =int(L)
+    P = int(P)  
+
+    # # print (C, L, P) 
     # #debug
-    # C = 5
+    # C = 3
     # L = 3
-    # P =26
+    # P = 4
     # print(C, L, P)
     # #
 
-    # f = open("Knowledge database.txt", "a")
-    # f.write(str(C) + '\n' + str(L) + '\n' + str(P) + '\n')
-    # f.close() 
+    f = open("Knowledge database.txt", "a")
+    f.write(str(C) + '\n' + str(L) + '\n' + str(P) + '\n')
+    f.close
 
-    # #debug
-    # total_tries = 0
-    # #
+    #debug
+    total_tries = 0
+    #
     
-    # for X in range(C) :
-    #     sentence = '' 
-    #     sentenceExists = True
-    #     while sentenceExists == True : 
-    #         total_tries = total_tries + 1
+    for X in range(C) :
+        sentence = '' 
+        sentenceExists = True
+        while sentenceExists == True : 
+            total_tries = total_tries + 1
 
-    #         terms = random.randint(1, L)
-    #         #chech if randint has %possibility
-    #         for Y in range(terms) :
-    #             R_repeats = True
+            terms = random.randint(1, L)
+            #chech if randint has %possibility
+            for Y in range(terms) :
+                R_repeats = True
 
-    #             while  R_repeats == True : 
-    #                 R = literals[random.randint(1, P-1)]
-    #                 R_repeats = False
+                while  R_repeats == True : 
+                    R = literals[random.randint(1, P-1)]
+                    R_repeats = False
                     
 
-    #                 for literal in sentence :
-    #                     if literal == '-' or literal == ' ' or literal == '^':
-    #                         continue
-    #                     if literal == R :
-    #                         R_repeats = True
-    #                         break
+                    for literal in sentence :
+                        if literal == '-' or literal == ' ' or literal == '^':
+                            continue
+                        if literal == R :
+                            R_repeats = True
+                            break
                 
-    #             if random.randint(0, 1) == 1 :
-    #                 R ='-' + R
-    #             if Y != terms-1 :
-    #                 sentence = sentence + R + ' | ' 
-    #             else :
-    #                 sentence = sentence + R 
+                if random.randint(0, 1) == 1 :
+                    R ='-' + R
+                if Y != terms-1 :
+                    sentence = sentence + R + ' | ' 
+                else :
+                    sentence = sentence + R 
                 
 
-    #         sentenceExists = False     
+            sentenceExists = False     
 
-    #         for line in txt :
-    #             if line == sentence :
-    #                 sentenceExists = True  
-    #                 break 
-                #check for opposite clause
-            
-    #         if sentenceExists == False :
-    #             txt.append(sentence)
-       
+            for line in txt :
+                if line == sentence :
+                    sentenceExists = True  
+                    break
+                #if line 
+                #check for opposite clause       1611, 1603 copy paste. Melinaki copy paste.  
+            if sentenceExists == False :
+                txt.append(sentence)
+
+    f = open("Knowledge database.txt", "a")
+    
+    for line in range(len(txt)) :
+        f.write(txt[line] + '\n')
+    f.close() 
+    """
+
     #debug
-    txt = [ '-x | -v',
-            '-z | s | j',
-            '-h',
-            '-w',
-            'h | -o'    ]
-    given_literal = '-b'
+    txt = [ '-a | -b',
+            'c'
+                    ]
+    # given_literal = '-b'
     #
 
     GSAT_data = txt #clauses connected with ^
 
-    # while 1:
-    #     given_literal = input("give literal")
-    #for char in given_literal :
-    #    if char != '#' or (char > 'a' and char < 'z') :
-                 
-    #     #check if input = literal or #
-    #     if given_literal == '#' :
-    #         break
-    #step in for while
     
+    while 1:
+        given_literal = ''
 
-    given_literal.replace(' ', '')
-    if given_literal[0] == '-' :
-        given_literal = given_literal[1:2]
-    else :
-        given_literal = "-"+ given_literal          
+        while not (len(given_literal) == 1 and (((given_literal.isalpha() and given_literal.islower()) or ('#' == given_literal)))):
+            given_literal = input("give literal")
+        
+        if given_literal == '#' :
+            print("Exit")
+            break
 
+        notation = ''
+
+        while not notation.upper() == 'Y' and not notation.upper() == 'N' :
+            notation = input("does literal have - in front of it? (y/n)").upper()
+        
+        if notation.upper() == 'Y':
+            notated_literal = '-' + given_literal
+        else :
+            notated_literal = given_literal
+
+        print(notated_literal)
+
+        GSAT_data.append(notated_literal)
+        print(GSAT_data)
+
+        #can be given by user 
+        max_flips = 5
+        max_retries = 5
+
+        entailment = False  
+        Gsat = False 
+
+        entailment = GSAT(GSAT_data, max_retries, max_flips)
+        if entailment == False :
+            print(entailment)#debug
+            #Resolutions = #resolution 
+            #GSAT_data = Resolutions
+            # f = open("Knowledge database.txt", "a")
     
-    max_flips = 5
-    max_retries = 5
-    GSAT_data.append(given_literal)
+            # for line in range(len(txt)) :
+            #     f.write(Resolutions + '\n')
+            # f.close() 
+        else :
+            Gsat = True
 
-    GSAT(GSAT_data, max_retries, max_flips)
+        print(notated_literal + ",")
 
-    #step in for while 
-
-
-    f = open("Knowledge database.txt", "a")
-    
-    #for line in range(len(txt)) :
-      #  f.write(txt[line] + '\n')
-    f.close() 
+        if entailment == True:
+            print("Literal is entailed by KB, ")
+            if Gsat == True :
+                print("entailment was proven by GSAT\n\n")
+            else :
+                print("entailment was proven by resolution\n\n")
+        else :
+            print("Literal is not entailed by KB")
+        
