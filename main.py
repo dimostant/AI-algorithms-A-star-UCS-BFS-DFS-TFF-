@@ -77,23 +77,25 @@ def calculateClausesResult(a, assignments, unique_literals):
     
     return clauses_assignments
 
+
+
 def GSAT(a, maxTries, maxFlips):
         
-        unique_literals = []
-        for clause in range(len(a)) : 
-            for literal in a[clause]:
-                if literal in unique_literals :
-                    continue
-                else :
-                    unique_literals.append(literal)
-        
-        unique_literals.remove(' ')
-        unique_literals.remove('|')
-        unique_literals.remove('-')
+    unique_literals = []
+    for clause in range(len(a)) : 
+        for literal in a[clause]:
+            if literal in unique_literals :
+                continue
+            else :
+                unique_literals.append(literal)
+    
+    unique_literals.remove(' ')
+    unique_literals.remove('|')
+    unique_literals.remove('-')
 
-        print(unique_literals)
+    print(unique_literals)
 
-    #for try in range(maxTries) :
+    for trie in range(maxTries) :
 
         assignments = []
         #chech if randint has %possibility
@@ -111,9 +113,15 @@ def GSAT(a, maxTries, maxFlips):
         cost = clauses_assignments.count(False)
         print(cost)
 
-        #for flip in range(maxFlips) :
-        for i in [1, 2] : #debug    
+        for flip in range(maxFlips) :
+            
+            solution = True
+            
+            #save runs if no solution can be found
+            if solution == False:
+                continue
 
+            print("maxflips")
             if cost == 0 : 
                 print("returned")
                 return clauses_assignments
@@ -122,17 +130,15 @@ def GSAT(a, maxTries, maxFlips):
                 flip_assignments = []
                 flip_assignments_costs = []
 
-                #for assignment in range(assignments) :
-                for assignment in range(3) :
-                    new_assignments = assignments.copy()#so that only new assignments is edited
+                for assignment in range(len(assignments)) :
+                    new_assignments = assignments.copy() #so that only new assignments is edited
                     print(new_assignments)
                     new_assignments[assignment] = not new_assignments[assignment]
                     print(new_assignments)
                     flip_assignments.append(new_assignments[:])# : operator so list can get new items and not copy new ones
                     print(flip_assignments) 
-                    cost = calculateClausesResult(a, new_assignments, unique_literals).count(False)
-                    # does one more iteration ??
-                    flip_assignments_costs.append(cost)
+                    new_cost = calculateClausesResult(a, new_assignments, unique_literals).count(False)
+                    flip_assignments_costs.append(new_cost)
                 
                 print(flip_assignments_costs)
 
@@ -142,13 +148,24 @@ def GSAT(a, maxTries, maxFlips):
                 flip_assignments_costs_sorted = sorted(flip_assignments_costs)
                 print(flip_assignments_sorted)
                 print(flip_assignments_costs_sorted)
-                assignments = flip_assignments_sorted[0]
-                cost = flip_assignments_costs_sorted[0]
+                
+                if flip_assignments_costs_sorted[0] < cost :
+                    assignments = flip_assignments_sorted[0]
+                    cost = flip_assignments_costs_sorted[0]
+                else :
+                    solution = False
 
                 print(assignments)
 
-        print("false")
-        return False
+        
+        if cost == 0 : 
+            print("returned")
+            return clauses_assignments
+        
+    print("false")
+    return False
+
+
 
 if __name__ == "__main__":
     # it_is = False
