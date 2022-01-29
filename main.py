@@ -124,7 +124,7 @@ def GSAT(a, maxTries, maxFlips):
             print("maxflips")
             if cost == 0 : 
                 print("returned")
-                return True
+                return False
             
             else :
                 flip_assignments = []
@@ -160,12 +160,14 @@ def GSAT(a, maxTries, maxFlips):
         
         if cost == 0 : 
             print("returned")
-            return True
+            return False
         
     print("false")
-    return False
+    return True
 
 
+def resolution():
+    print("start implementation ") 
 
 if __name__ == "__main__":
 
