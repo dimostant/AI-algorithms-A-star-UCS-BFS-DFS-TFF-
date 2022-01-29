@@ -169,8 +169,7 @@ def GSAT(a, maxTries, maxFlips):
 
 if __name__ == "__main__":
 
-    """
-        it_is = False
+    it_is = False
 
     while not it_is:
         C = input("Give number of sentences for knolwedge database")
@@ -220,16 +219,11 @@ if __name__ == "__main__":
     f = open("Knowledge database.txt", "a")
     f.write(str(C) + '\n' + str(L) + '\n' + str(P) + '\n')
     f.close
-
-    #debug
-    total_tries = 0
-    #
     
     for X in range(C) :
         sentence = '' 
         sentenceExists = True
         while sentenceExists == True : 
-            total_tries = total_tries + 1
 
             terms = random.randint(1, L)
             #chech if randint has %possibility
@@ -263,7 +257,7 @@ if __name__ == "__main__":
                     sentenceExists = True  
                     break
                 #if line 
-                #check for opposite clause       1611, 1603 copy paste. Melinaki copy paste.  
+                #check for opposite clause
             if sentenceExists == False :
                 txt.append(sentence)
 
@@ -272,7 +266,7 @@ if __name__ == "__main__":
     for line in range(len(txt)) :
         f.write(txt[line] + '\n')
     f.close() 
-    """
+
 
     #debug
     txt = [ '-a | -b',
