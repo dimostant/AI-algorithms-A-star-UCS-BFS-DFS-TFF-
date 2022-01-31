@@ -78,9 +78,11 @@ def calculateClausesResult(a, assignments, unique_literals):
     return clauses_assignments
 
 
-
-def GSAT(a, maxTries, maxFlips):
+def GSAT(KB, literal, maxTries, maxFlips):
         
+    a = KB
+    a.append(literal)
+
     unique_literals = []
     for clause in range(len(a)) : 
         for literal in a[clause]:
@@ -166,11 +168,30 @@ def GSAT(a, maxTries, maxFlips):
     return True
 
 
-def resolution():
+def resolution(txt, literal):
     print("start implementation ") 
 
-if __name__ == "__main__":
+    a = txt
+    a.append(literal)
 
+    newA = []
+    newAclause = []
+    for clause in a : 
+        newA = [ char for char in clause if not (char == ' ' or char == '|')]
+        newAclause.append(newA)
+    print(newAclause)
+
+    
+
+
+    
+
+
+    
+
+
+if __name__ == "__main__":
+    """
     it_is = False
 
     while not it_is:
@@ -216,7 +237,7 @@ if __name__ == "__main__":
     # L = 3
     # P = 4
     # print(C, L, P)
-    # #
+    # #  
 
     f = open("Knowledge database.txt", "a")
     f.write(str(C) + '\n' + str(L) + '\n' + str(P) + '\n')
@@ -269,17 +290,15 @@ if __name__ == "__main__":
         f.write(txt[line] + '\n')
     f.close() 
 
+    """
 
     #debug
-    txt = [ '-a | -b',
-            'c'
-                    ]
+    txt = [ 'b | -a',
+            'a'     ]
     # given_literal = '-b'
     #
 
-    GSAT_data = txt #clauses connected with ^
 
-    
     while 1:
         given_literal = ''
 
@@ -302,8 +321,6 @@ if __name__ == "__main__":
 
         print(notated_literal)
 
-        GSAT_data.append(notated_literal)
-        print(GSAT_data)
 
         #can be given by user 
         max_flips = 5
@@ -312,10 +329,12 @@ if __name__ == "__main__":
         entailment = False  
         Gsat = False 
 
-        entailment = GSAT(GSAT_data, max_retries, max_flips)
+        #entailment = GSAT(txt, notated_literal, max_retries, max_flips)
+        print(txt)
         if entailment == False :
             print(entailment)#debug
-            #Resolutions = #resolution 
+            #Resolutions = 
+            resolution(txt, notated_literal) 
             #GSAT_data = Resolutions
             # f = open("Knowledge database.txt", "a")
     
