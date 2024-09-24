@@ -1,3 +1,2 @@
 # xD-TIM-AI
-ΜΑΘΕΤΕ ΤΕΧΝΟΛΟΓΙΑ ΡΕ ΚΩΛΟΜΠΟΥΡΑ
-As iffffffff
+Basic AI algorithm Implementations in python
